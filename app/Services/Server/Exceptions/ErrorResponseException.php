@@ -18,7 +18,7 @@ class ErrorResponseException extends BaseServerException
             throw new \RuntimeException('Wrong answer');
         }
 
-        $this->message = $json->error;
+        $this->message = $json->message;
 
     }
 }

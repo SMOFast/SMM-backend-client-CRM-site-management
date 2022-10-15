@@ -2,42 +2,20 @@
 
 namespace App\Services\Server\Dto\Requests;
 
-use App\Models\User;
-use Illuminate\Contracts\Support\Arrayable;
+use Spatie\DataTransferObject\Attributes\MapFrom;
+use Spatie\DataTransferObject\DataTransferObject;
 
-class RegisterUserRequestDto implements Arrayable
+class RegisterUserRequestDto extends DataTransferObject
 {
 
-    public int    $id;
+    #[MapFrom('id')]
+    public int    $user_id;
+
     public string $name;
+
     public string $email;
+
     public string $password;
 
-    public static function createFromModel(User $user): self
-    {
-        return self::createFromObject($user);
-    }
-
-    public static function createFromObject(object $object): self
-    {
-
-        $dto           = new self();
-        $dto->id       = $object->id;
-        $dto->name     = $object->name;
-        $dto->email    = $object->email;
-        $dto->password = $object->password;
-
-        return $dto;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'id'       => $this->id,
-            'name'     => $this->name,
-            'email'    => $this->email,
-            'password' => $this->password,
-        ];
-    }
 }
 

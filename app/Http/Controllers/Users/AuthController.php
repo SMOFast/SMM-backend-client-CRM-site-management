@@ -6,7 +6,7 @@ use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
 use App\Services\Server\BaseApiService;
 use App\Services\Server\Dto\Requests\RegisterUserRequestDto;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
 
@@ -16,29 +16,34 @@ class AuthController
     public function store(RegisterUserRequest $request)
     {
 
-        $user           = new User();
-        $user->name     = $request->get('name');
-        $user->email    = $request->get('email');
-        $user->password = Hash::make($request->get('password'));
-
-        $user->save();
-
         try {
-            $serverUser = app(BaseApiService::class)->registerUser(RegisterUserRequestDto::createFromModel($user));
-        } catch (Throwable $e) {
+            DB::transaction(function () use ($request) {
+                $user           = new User();
+                $user->name     = $request->get('name');
+                $user->email    = $request->get('email');
+                $user->password = Hash::make($request->get('password'));
+
+                $user->save();
+
+                try {
+                    $dto        = (new RegisterUserRequestDto($user->makeVisible('password')->toArray()));
+                    $serverUser = app(BaseApiService::class)->registerUser($dto);
+                } catch (Throwable $e) {
+                    throw new \RuntimeException($e->getMessage());
+                }
+
+                $user->server_user_id    = $serverUser->user_id;
+                $user->server_user_token = $serverUser->access_token;
+
+                $user->save();
+
+                return $user;
+            });
+        } catch (\Throwable $e) {
             return redirect('register')->with('error', $e->getMessage());
         }
 
-        $user->server_user_id    = $serverUser->user_id;
-        $user->server_user_token = $serverUser->access_token;
-
-        $user->save();
-
-    }
-
-    public function login(Request $request)
-    {
-
+        return redirect('dashboard');
 
     }
 

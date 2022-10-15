@@ -33,8 +33,10 @@ use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 
 Route::get('/', function () {
 
-    $res = new \App\Services\Server\BaseApiService();
-    $res->testRequest();;
+    $user = \App\Models\User::find(1);
+
+    $res = (new \App\Services\Server\BaseApiService())->setUser($user)->me();
+    dd($res);
 
     return view('welcome');
 });
