@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Users\AuthController;
+use App\Http\Controllers\Users\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Http\Controllers\AuthenticatedSessionController;
@@ -33,12 +34,11 @@ use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 
 Route::get('/', function () {
 
-    $user = \App\Models\User::find(1);
+//    $user = \App\Models\User::find(1);
+//    $res = (new \App\Services\Server\BaseApiService())->setUser($user)->me();
+//    dd($res);
 
-    $res = (new \App\Services\Server\BaseApiService())->setUser($user)->me();
-    dd($res);
-
-    return view('welcome');
+    return view('pages.index');
 });
 
 Route::middleware([
@@ -55,12 +55,12 @@ Route::middleware([
 Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
     $enableViews = config('fortify.views', true);
 
-    Route::post('/register', [AuthController::class, 'store'])
+    Route::post('/register', [RegisterController::class, 'store'])
          ->middleware(['guest:' . config('fortify.guard')]);
 
     // Authentication...
     if ($enableViews) {
-        Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+        Route::get('/login', [AuthController::class, 'create'])
              ->middleware(['guest:' . config('fortify.guard')])
              ->name('login');
     }
