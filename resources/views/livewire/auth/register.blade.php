@@ -1,4 +1,4 @@
-<form wire:submit.prevent="auth">
+<form wire:submit.prevent="register">
     <button class="btn btn-grey w-100">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_109_862)">
@@ -21,7 +21,7 @@
                 </clipPath>
             </defs>
         </svg>
-        <span class="ms-2">Log in with google</span>
+        <span class="ms-2">Register with google</span>
     </button>
     <div class="py-4 text-center">
         <hr>
@@ -49,14 +49,17 @@
         </div>
         @enderror
     </div>
-    <div class="d-flex align-items-center">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" wire:model="remember">
-            <label class="form-check-label small" for="defaultCheck1">
-                Remember for 30 days
-            </label>
+    <div class="mb-3">
+        <div class="input-group">
+            <span class="input-group-text"><i class="fa-regular fa-unlock-keyhole"></i></span>
+            <input class="form-control @if($errors->has('password_confirmation')) is-invalid @endif" placeholder="Password" wire:model="password_confirmation" type="password">
         </div>
-        <a href="/reset-password.php" class="ms-auto small text-decoration"><u>Forgot password</u></a>
+        @error('password_confirmation')
+        <div class="ms-2 mt-2 small text-danger">
+            {{ $message }}
+        </div>
+        @enderror
     </div>
-    <button class="btn btn-lg btn-primary mt-5 w-100">Log in</button>
+
+    <button class="btn btn-lg btn-primary mt-5 w-100">Sign up</button>
 </form>

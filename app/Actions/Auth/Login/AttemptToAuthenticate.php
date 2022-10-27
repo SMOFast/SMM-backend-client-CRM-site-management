@@ -3,7 +3,7 @@
 namespace App\Actions\Auth\Login;
 
 use App\Services\Auth\LoginRateLimiter;
-use App\Services\Server\Dto\Requests\LoginUserRequestDto;
+use App\Services\Client\Dto\LoginUserRequestClientDto;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
@@ -21,11 +21,11 @@ class AttemptToAuthenticate
         $this->limiter = $limiter;
     }
 
-    public function handle(LoginUserRequestDto $dto, $next)
+    public function handle(LoginUserRequestClientDto $dto, $next)
     {
 
         if ($this->guard->attempt(
-            $dto->only('user,password')->toArray(),
+            $dto->only('email', 'password')->toArray(),
             $dto->remember)
         ) {
             return $next($dto);
@@ -34,7 +34,7 @@ class AttemptToAuthenticate
         $this->throwFailedAuthenticationException($dto);
     }
 
-    protected function throwFailedAuthenticationException(LoginUserRequestDto $dto)
+    protected function throwFailedAuthenticationException(LoginUserRequestClientDto $dto)
     {
         $this->limiter->increment($dto);
 

@@ -373,7 +373,7 @@ button {
 }
 
 .bg-soft-white {
-    background: rgb(255 255 255 / .3);
+    background: rgb(255 255 255 / .1);
 }
 
 .bg-soft-orange {
@@ -607,7 +607,7 @@ label {
 .form-control {
     min-height: 48px;
     border-color: var(--border-color);
-    background: var(--bgr-card);
+    background-color: var(--bgr-card);
     color: var(--secondary);
     border-radius: 6px;
 }
@@ -725,6 +725,7 @@ main {
 }
 
 .navbar {
+    min-height: 76px;
     padding: 14px 0;
 }
 
@@ -808,7 +809,7 @@ main {
 .dropdown-item {
     font-size: 14px;
     padding: 10px 20px;
-    color: var(--secondary);
+    color: var(--secondary) !important;
 }
 
 .navbar .dropdown-item .fa-regular {
@@ -862,8 +863,9 @@ main {
         left: 0;
         overflow: auto;
         width: 100vw;
-        height: 90vh;
-        background: var(--white);
+        height: 92vh;
+        background: var(--bgr-primary);
+        padding-bottom: 24px;
     }
 
     .header .navbar .dropdown-menu {
@@ -1205,7 +1207,7 @@ main {
 }
 
 .hero-image {
-    background: url(/resources/assets/img/hero-image-2.png) no-repeat center center / contain;
+    background: url(/assets/img/hero-image-2.png) no-repeat center center / contain;
     width: 100%;
     max-width: 431px;
     height: 429px;
@@ -1224,7 +1226,7 @@ main {
     max-height: 650px;
     content: '';
     opacity: .6;
-    background: url(/resources/assets/img/hero-blur.svg) no-repeat center center / contain;
+    background: url(/assets/img/hero-blur.svg?v=2) no-repeat center center / contain;
 }
 
 .hero__dots {
@@ -1355,6 +1357,18 @@ main {
     font-weight: 500;
     padding: 14px 28px;
     color: var(--secondary);
+    text-align: center;
+}
+
+@media (max-width: 420px) {
+    .nav-pills-category {
+        padding: 8px;
+    }
+
+    .nav-pills-category .nav-link {
+        padding: 10px 14px;
+        width: 50%;
+    }
 }
 
 .nav-pills-category .nav-link.active {
@@ -1618,8 +1632,12 @@ main {
 .footer {
     font-size: 14px;
     padding: 64px 0 32px 0;
-    color: var(--secondary);
-    background: var(--bgr-primary);
+    color: var(--white);
+    background: var(--primary);
+}
+
+.footer a {
+    color: var(--white);
 }
 
 .footer hr {
@@ -1675,7 +1693,7 @@ main {
     }
 
     .hero-image {
-        background: url(/resources/assets/img/hero-dark.svg) no-repeat center center / contain;
+        background: url(/assets/img/hero-dark.svg) no-repeat center center / contain;
     }
 
     .section-choose {

@@ -1,3 +1,7 @@
+@section('meta_title', 'Libgram - Automated promotion system')
+@section('meta_keywords', 'libgram, cheat, promotion, promotion, smm, service, site, system, online, social networks, services, views, subscribers, likes, viewers, comments, advertising, top, trends')
+@section('meta_description', 'Online service for the promotion and promotion of social networks. Subscribers, views, comments and likes on social networks at low prices.')
+
 <x-app-layout>
     <main class="d-flex flex-column">
 

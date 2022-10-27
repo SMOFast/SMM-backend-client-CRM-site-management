@@ -1,18 +1,18 @@
-@section('meta_title', 'Sign in. Libgram - Automated promotion system')
+@section('meta_title', 'Sign up. Libgram - Automated promotion system')
 
 <x-app-layout>
     <main class="d-flex flex-column bg-grey-100">
         <section class="section">
             <div class="card shadow-m mx-auto" style="max-width: 480px; width: 100%;">
-                <h1 class="h4 mb-1">Welcome back 👋 </h1>
+                <h1 class="h4 mb-1">Welcome 👋 </h1>
                 <p class="text-second mb-4">Please enter your details.</p>
 
-                @livewire('auth.login')
+                @livewire('auth.register')
 
                 <div class="mt-4 text-center">
                     <div class="d-flex align-items-center justify-content-center">
-                        <span>Don’t have in account?</span>
-                        <a href="{{ route('register') }}" class="ms-2">Sing up for free</a>
+                        <span>Already have account?</span>
+                        <a href="{{ route('login') }}" class="ms-2">Sing in</a>
                     </div>
                     <svg style="position:relative; left: 34%" width="62" height="25" viewBox="0 0 62 25" fill="none"
                          xmlns="http://www.w3.org/2000/svg">

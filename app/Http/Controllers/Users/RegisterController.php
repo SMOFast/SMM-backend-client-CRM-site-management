@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
+use App\Services\Client\Dto\RegisterUserRequestClientDto;
 use App\Services\Server\BaseApiService;
 use App\Services\Server\Dto\Requests\RegisterUserRequestDto;
 use Illuminate\Support\Facades\DB;
@@ -13,37 +14,39 @@ use Throwable;
 class RegisterController
 {
 
-    public function store(RegisterUserRequest $request)
+    public function create()
+    {
+        return view('pages.auth.register');
+    }
+
+    /**
+     * @throws \Throwable
+     */
+    public function store(RegisterUserRequestClientDto $dto)
     {
 
-        try {
-            DB::transaction(function () use ($request) {
-                $user           = new User();
-                $user->name     = $request->get('name');
-                $user->email    = $request->get('email');
-                $user->password = Hash::make($request->get('password'));
+        DB::transaction(function () use ($dto) {
+            $user           = new User();
+            $user->name     = $dto->email;
+            $user->email    = $dto->email;
+            $user->password = Hash::make($dto->password);
 
-                $user->save();
+            $user->save();
 
-                try {
-                    $dto        = (new RegisterUserRequestDto($user->makeVisible('password')->toArray()));
-                    $serverUser = app(BaseApiService::class)->registerUser($dto);
-                } catch (Throwable $e) {
-                    throw new \RuntimeException($e->getMessage());
-                }
+            try {
+                $dto        = (new RegisterUserRequestDto($user->makeVisible('password')->toArray()));
+                $serverUser = app(BaseApiService::class)->registerUser($dto);
+            } catch (Throwable $e) {
+                throw new \RuntimeException($e->getMessage());
+            }
 
-                $user->server_user_id    = $serverUser->user_id;
-                $user->server_user_token = $serverUser->access_token;
+            $user->server_user_id    = $serverUser->user_id;
+            $user->server_user_token = $serverUser->access_token;
 
-                $user->save();
+            $user->save();
 
-                return $user;
-            });
-        } catch (\Throwable $e) {
-            return redirect('register')->with('error', $e->getMessage());
-        }
-
-        return redirect('dashboard');
+            return $user;
+        });
 
     }
 

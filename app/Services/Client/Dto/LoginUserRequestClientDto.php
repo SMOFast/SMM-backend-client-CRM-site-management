@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Services\Server\Dto\Requests;
+namespace App\Services\Client\Dto;
 
 use Spatie\DataTransferObject\DataTransferObject;
 
-class LoginUserRequestDto extends DataTransferObject
+class LoginUserRequestClientDto extends DataTransferObject
 {
 
-    public string $name;
+    public string $email;
 
     public string $password;
 

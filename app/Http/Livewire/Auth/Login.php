@@ -3,19 +3,18 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Http\Controllers\Users\AuthController;
-use App\Services\Server\Dto\Requests\LoginUserRequestDto;
-use App\Services\Server\Dto\Requests\RegisterUserRequestDto;
+use App\Services\Client\Dto\LoginUserRequestClientDto;
 use Livewire\Component;
 
 class Login extends Component
 {
 
-    public $name;
+    public $email;
     public $password;
     public $remember;
 
     protected $rules = [
-        'name'     => 'required|min:2',
+        'email'    => 'required|email:strict',
         'password' => 'required',
         'remember' => 'sometimes|nullable',
     ];
@@ -29,16 +28,16 @@ class Login extends Component
     {
         $this->validate();
 
-        $dto = (new LoginUserRequestDto([
-            'name'     => $this->name,
+        $dto = (new LoginUserRequestClientDto([
+            'email'    => $this->email,
             'password' => $this->password,
             'remember' => $this->remember,
-            'ip'       => $_SERVER['REMOTE_ADDR'],
+            'ip'       => request()->server('REMOTE_ADDR'),
         ]));
 
-        $res = app(AuthController::class)->store($dto);
+        app(AuthController::class)->store($dto);
 
-        dd($res);
+        $this->redirect(route('index'));
 
     }
 }

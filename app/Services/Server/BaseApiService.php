@@ -4,6 +4,7 @@ namespace App\Services\Server;
 
 use App\Models\User;
 use App\Services\Server\Dto\Requests\RegisterUserRequestDto;
+use App\Services\Server\Dto\Responses\CategoriesResponseDto;
 use App\Services\Server\Dto\Responses\RegisterUserResponseDto;
 use App\Services\Server\Dto\Responses\UserInfoResponseDto;
 use App\Services\Server\Exceptions\ErrorResponseException;
@@ -11,6 +12,7 @@ use App\Services\Server\Exceptions\UnauthenticatedResponseException;
 use App\Services\Server\Exceptions\UnexpectedResponseException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Collection;
 
 class BaseApiService
 {
@@ -24,6 +26,22 @@ class BaseApiService
         $this->client = new Client([
             'base_uri' => config('app.server_api_url'),
         ]);
+    }
+
+    /**
+     * @throws \App\Services\Server\Exceptions\UnexpectedResponseException
+     * @throws \App\Services\Server\Exceptions\ErrorResponseException
+     */
+    public function categories(): Collection
+    {
+        $response = $this->request(url: 'categories', method: 'GET');
+
+        $categories = new Collection();
+        foreach ($response['data'] as $category) {
+            $categories->add($category);
+        }
+
+        return $categories;
     }
 
     /**

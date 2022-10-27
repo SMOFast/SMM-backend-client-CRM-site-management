@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pages\IndexController;
 use App\Http\Controllers\Users\AuthController;
 use App\Http\Controllers\Users\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -15,36 +16,32 @@ use Laravel\Fortify\Http\Controllers\PasswordController;
 use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 use Laravel\Fortify\Http\Controllers\ProfileInformationController;
 use Laravel\Fortify\Http\Controllers\RecoveryCodeController;
-use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticatedSessionController;
 use Laravel\Fortify\Http\Controllers\TwoFactorAuthenticationController;
 use Laravel\Fortify\Http\Controllers\TwoFactorQrCodeController;
 use Laravel\Fortify\Http\Controllers\TwoFactorSecretKeyController;
 use Laravel\Fortify\Http\Controllers\VerifyEmailController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
+
+Route::get('/', IndexController::class)->name('index');
+
+Route::get('/{category}', IndexController::class)->name('category');
+Route::get('/{category}/{subcategory}', IndexController::class)->name('subcategory');
+Route::get('/{category}/{subcategory}/{product}', IndexController::class)->name('product');
+
+//Route::get('/', function () {
 
 //    $user = \App\Models\User::find(1);
 //    $res = (new \App\Services\Server\BaseApiService())->setUser($user)->me();
 //    dd($res);
 
-    return view('pages.index');
-});
+//    return view('pages.index');
+//})->name('index');
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -53,27 +50,25 @@ Route::middleware([
 
 
 Route::group(['middleware' => config('fortify.middleware', ['web'])], function () {
-    $enableViews = config('fortify.views', true);
+    $enableViews = true;
 
     Route::post('/register', [RegisterController::class, 'store'])
          ->middleware(['guest:' . config('fortify.guard')]);
 
-    // Authentication...
-    if ($enableViews) {
-        Route::get('/login', [AuthController::class, 'create'])
-             ->middleware(['guest:' . config('fortify.guard')])
-             ->name('login');
-    }
+
+    Route::get('/login', [AuthController::class, 'create'])
+         ->middleware(['guest:' . config('fortify.guard')])
+         ->name('login');
+
+    Route::get('/register', [RegisterController::class, 'create'])
+         ->middleware(['guest:' . config('fortify.guard')])
+         ->name('register');
+
 
     $limiter             = config('fortify.limiters.login');
     $twoFactorLimiter    = config('fortify.limiters.two-factor');
     $verificationLimiter = config('fortify.limiters.verification', '6,1');
 
-    Route::post('/login', [AuthenticatedSessionController::class, 'store'])
-         ->middleware(array_filter([
-             'guest:' . config('fortify.guard'),
-             $limiter ? 'throttle:' . $limiter : null,
-         ]));
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
          ->name('logout');
@@ -100,15 +95,13 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     }
 
     // Registration...
-    if (Features::enabled(Features::registration())) {
-        if ($enableViews) {
-            Route::get('/register', [RegisteredUserController::class, 'create'])
-                 ->middleware(['guest:' . config('fortify.guard')])
-                 ->name('register');
-        }
-
-
-    }
+//    if (Features::enabled(Features::registration())) {
+//        if ($enableViews) {
+//            Route::get('/register', [RegisteredUserController::class, 'create'])
+//                 ->middleware(['guest:' . config('fortify.guard')])
+//                 ->name('register');
+//        }
+//    }
 
     // Email Verification...
     if (Features::enabled(Features::emailVerification())) {
