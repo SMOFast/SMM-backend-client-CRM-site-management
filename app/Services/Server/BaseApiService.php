@@ -47,6 +47,22 @@ class BaseApiService
     /**
      * @throws \App\Services\Server\Exceptions\UnexpectedResponseException
      * @throws \App\Services\Server\Exceptions\ErrorResponseException
+     */
+    public function products($categoryId = null): Collection
+    {
+        $response = $this->request(url: 'products', data:['category_id'=>$categoryId], method: 'GET');
+
+        $products = new Collection();
+        foreach ($response['data'] as $product) {
+            $products->add($product);
+        }
+
+        return $products;
+    }
+
+    /**
+     * @throws \App\Services\Server\Exceptions\UnexpectedResponseException
+     * @throws \App\Services\Server\Exceptions\ErrorResponseException
      * @throws \Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
     public function registerUser(RegisterUserRequestDto $dto): RegisterUserResponseDto

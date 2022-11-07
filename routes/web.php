@@ -26,7 +26,7 @@ use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 Route::get('/', IndexController::class)->name('index');
 
 Route::get('/{category}', IndexController::class)->name('category');
-Route::get('/{category}/{subcategory}', IndexController::class)->name('subcategory');
+Route::get('/{category}/{subcategory}', [IndexController::class, 'products'])->name('subcategory');
 Route::get('/{category}/{subcategory}/{product}', IndexController::class)->name('product');
 
 //Route::get('/', function () {
