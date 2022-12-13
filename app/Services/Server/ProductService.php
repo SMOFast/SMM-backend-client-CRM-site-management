@@ -9,7 +9,7 @@ class ProductService
 {
     function list($category = null): Collection
     {
-
+        return (new BaseApiService())->products($category['id']);
         $cacheKey = 'products';
         if ($category ?? null) {
             $cacheKey .= '-category-'.$category['id'];

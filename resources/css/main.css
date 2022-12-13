@@ -1207,7 +1207,7 @@ main {
 }
 
 .hero-image {
-    background: url(/assets/img/hero-image-2.png) no-repeat center center / contain;
+    background: url(../assets/img/hero-image-2.png) no-repeat center center / contain;
     width: 100%;
     max-width: 431px;
     height: 429px;
@@ -1226,7 +1226,7 @@ main {
     max-height: 650px;
     content: '';
     opacity: .6;
-    background: url(/assets/img/hero-blur.svg?v=2) no-repeat center center / contain;
+    background: url(../assets/img/hero-blur.svg?v=2) no-repeat center center / contain;
 }
 
 .hero__dots {
@@ -1693,7 +1693,7 @@ main {
     }
 
     .hero-image {
-        background: url(/assets/img/hero-dark.svg) no-repeat center center / contain;
+        background: url(../assets/img/hero-dark.svg) no-repeat center center / contain;
     }
 
     .section-choose {

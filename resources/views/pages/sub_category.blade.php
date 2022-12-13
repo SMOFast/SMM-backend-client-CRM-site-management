@@ -10,16 +10,14 @@
                     <div class="col-lg-7 col-xxl-5 me-auto">
                         <h2 class="mb-4">
                             {{ $currentCategory['name'] }}
-                            <div>with <span class="color-orange">Instant Delivery</span></div>
+                            {!! $currentCategory['attributes']['category_title_description']['value'] ?? null !!}
                         </h2>
                         <p class="text-second fs-18 mb-56px">
-                            At Libergram, you can buy Instagram promotion <br>
-                            quickly, safely, and easily with just a few clicks. <br>
-                            See our deals below!
+                            {!! $currentCategory['attributes']['category_description']['value'] ?? null !!}
                         </p>
                     </div>
-                    <div class="col-lg-5 text-center text-lg-end d-none d-md-block">
-                        <div class="hero-image"></div>
+                    <div class="col-lg-5 d-none d-md-flex">
+                        <div class="hero-image mx-auto"></div>
                     </div>
                 </div>
                 <nav class="nav nav-pills nav-pills-category flex-column flex-sm-row align-items-center bg-grey-200">
@@ -50,126 +48,94 @@
            ============================================= -->
         <section class="section bg-grey-200 section-blur section-blur--sizing pt-5">
             <div class="container">
-                <form action="/order-get-started.php" class="tab-content" id="nav-tabContent">
+                <div class="tab-content" id="nav-tabContent">
 
                     @foreach($products as $product)
-                    <div class="tab-pane m-0 fade @if ($loop->first) active @endif show" id="nav-{{$product['slug']}}" role="tabpanel"
-                         aria-labelledby="nav-{{$product['slug']}}-tab">
-                        <!--Slider-->
-                        <div class="category-slider">
-                            <div class="card product-card shadow-m py-4 text-center">
-                                <input class="product-card-input" type="radio" name="productRadios" id="amount-100"
-                                       checked>
-                                <label class="product-card__label" for="amount-100"></label>
-                                <div class="product-card__discount">Save {{$product['id']}}%</div>
-                                <div class="product-card__amount">100</div>
-                                <div class="product-card__name">Likes</div>
-                                <hr>
-                                <div class="product-card__price d-flex align-items-center">
-                                    <span class="me-auto"><s>$3.63</s></span>
-                                    <span class="fs-24 fw-bold color-orange">$2.97</span>
-                                </div>
-                            </div>
-                            <div class="card product-card shadow-m py-4 text-center">
-                                <input class="product-card-input" type="radio" name="productRadios" id="amount-250">
-                                <label class="product-card__label" for="amount-250"></label>
-                                <div class="product-card__discount">Save 40%</div>
-                                <div class="product-card__amount">250</div>
-                                <div class="product-card__name">Likes</div>
-                                <hr>
-                                <div class="product-card__price d-flex align-items-center">
-                                    <span class="me-auto"><s>$9.07</s></span>
-                                    <span class="fs-24 fw-bold color-orange">$5.49</span>
-                                </div>
-                            </div>
-                            <div class="card product-card shadow-m py-4 text-center">
-                                <input class="product-card-input" type="radio" name="productRadios" id="amount-500">
-                                <label class="product-card__label" for="amount-500"></label>
-                                <div class="product-card__discount">Save 56%</div>
-                                <div class="product-card__amount">500</div>
-                                <div class="product-card__name">Likes</div>
-                                <hr>
-                                <div class="product-card__price d-flex align-items-center">
-                                    <span class="me-auto"><s>$18.15</s></span>
-                                    <span class="fs-24 fw-bold color-orange">$7.99</span>
-                                </div>
-                            </div>
-                            <div class="card product-card shadow-m py-4 text-center">
-                                <input class="product-card-input" type="radio" name="productRadios" id="amount-1000">
-                                <label class="product-card__label" for="amount-1000"></label>
-                                <div class="product-card__discount">Save 64%</div>
-                                <div class="product-card__amount">1000</div>
-                                <div class="product-card__name">Likes</div>
-                                <hr>
-                                <div class="product-card__price d-flex align-items-center">
-                                    <span class="me-auto"><s>$36.30</s></span>
-                                    <span class="fs-24 fw-bold color-orange">$13.09</span>
-                                </div>
-                            </div>
-                            <div class="card product-card shadow-m py-4 text-center">
-                                <input class="product-card-input" type="radio" name="productRadios" id="amount-1500">
-                                <label class="product-card__label" for="amount-1500"></label>
-                                <div class="product-card__discount">Save 68%</div>
-                                <div class="product-card__amount">1500</div>
-                                <div class="product-card__name">Likes</div>
-                                <hr>
-                                <div class="product-card__price d-flex align-items-center">
-                                    <span class="me-auto"><s>$40.13</s></span>
-                                    <span class="fs-24 fw-bold color-orange">$14.92</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Slider -->
-                        <div class="mt-5 text-center mb-56px">
-                            <button class="btn btn-lg btn-primary">Buy Now $5.49</button>
-                            <div class="d-flex align-items-center mt-4 justify-content-center">
-                                <div class="icon-colour icon-32 bg-soft-green me-3">
-                                    <i class="fa-solid fa-percent"></i>
-                                </div>
-                                <div class="ms-2 fw-medium">
-                                    You Saved <span class="color-green">$3.58</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-soft-white shadow-m p-4 rounding">
-                            <div class="row align-items-center">
-                                <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-colour icon-32 bg-soft-orange me-3">
-                                            <i class="fa-solid fa-solid fa-badge-check"></i>
+                        {{--                        {!! dd($product) !!}--}}
+                        <div class="tab-pane m-0 fade @if ($loop->first) active @endif show" id="nav-{{$product['slug']}}" role="tabpanel"
+                             aria-labelledby="nav-{{$product['slug']}}-tab">
+                            <!--Slider-->
+                            <div class="category-slider">
+                                @foreach($product['discounts'] as $discount)
+                                    @php
+                                        $default_price = ($product['prices']['price'] * $discount['count'])-($product['prices']['price'] * $discount['count']*$discount['discount']/100);
+                                        $discount_price = $product['prices']['price'] * $discount['count'];
+                                    @endphp
+                                    <div class="card product-card shadow-m py-4 text-center" data-id="{{$product['id']}}" data-price="{{$default_price}}" data-discount_price="{{$discount_price}}" data-count="{{$discount['count']}}">
+                                        <input class="product-card-input" type="radio" name="productRadios" id="discount-{{$discount['id']}}"
+                                               @if ($loop->first) checked @endif>
+                                        <label class="product-card__label" for="discount-{{$discount['id']}}"></label>
+                                        <div class="product-card__discount">Save {{$discount['discount']}}%</div>
+                                        <div class="product-card__amount">{{$discount['count'] * $product['multiplicity']}}</div>
+                                        <div class="product-card__name">{{$product['attributes']['multiplicity_description']['value']}}</div>
+                                        <hr>
+                                        <div class="product-card__price d-flex align-items-center">
+                                            <span class="me-auto"><s>${{$discount_price}}</s></span>
+                                            <span class="fs-24 fw-bold color-orange">${{$default_price}}</span>
                                         </div>
-                                        <sapn class="fs-14">Guaranteed Instant Delivery</sapn>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-colour icon-32 bg-soft-purple me-3">
-                                            <i class="fa-solid fa-users"></i>
+                                @endforeach
+                            </div>
+                            @php
+                                $default_price = ($product['prices']['price'] * $product['discounts'][0]['count'])-($product['prices']['price'] * $product['discounts'][0]['count']*$product['discounts'][0]['discount']/100);
+                                $discount_price = $product['prices']['price'] * $product['discounts'][0]['count'];
+                            @endphp
+                                <!-- End Slider -->
+                            <div class="mt-5 text-center mb-56px product_basket">
+                                <form method="post" action="{{route('addToBasket')}}">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product['id']}}" class="product_id">
+                                    <input type="hidden" name="count" value="{{$product['discounts'][0]['count']}}" class="product_count">
+                                    <button class="btn btn-lg btn-primary" type="submit">Buy Now $<span class="basket_price">{{$default_price}}</span></button>
+                                    <div class="d-flex align-items-center mt-4 justify-content-center">
+                                        <div class="icon-colour icon-32 bg-soft-green me-3">
+                                            <i class="fa-solid fa-percent"></i>
                                         </div>
-                                        <sapn class="fs-14">Real follows from real people</sapn>
+                                        <div class="ms-2 fw-medium">
+                                            You Saved <span class="color-green ">$<span class="basket_discount_price">{{$discount_price-$default_price}}</span></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-colour icon-32 bg-soft-red me-3">
-                                            <i class="fa-solid fa-bolt"></i>
+                                </form>
+                            </div>
+                            <div class="bg-soft-white shadow-m p-4 rounding">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-colour icon-32 bg-soft-orange me-3">
+                                                <i class="fa-solid fa-solid fa-badge-check"></i>
+                                            </div>
+                                            <sapn class="fs-14">Guaranteed Instant Delivery</sapn>
                                         </div>
-                                        <sapn class="fs-14">Fast delivery (gradual or instant)</sapn>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon-colour icon-32 bg-soft-sky me-3">
-                                            <i class="fa-regular fa-fingerprint"></i>
+                                    <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-colour icon-32 bg-soft-purple me-3">
+                                                <i class="fa-solid fa-users"></i>
+                                            </div>
+                                            <sapn class="fs-14">Real follows from real people</sapn>
                                         </div>
-                                        <sapn class="fs-14">No password required</sapn>
+                                    </div>
+                                    <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-colour icon-32 bg-soft-red me-3">
+                                                <i class="fa-solid fa-bolt"></i>
+                                            </div>
+                                            <sapn class="fs-14">Fast delivery (gradual or instant)</sapn>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-xxl-3 mb-3 mb-xxl-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="icon-colour icon-32 bg-soft-sky me-3">
+                                                <i class="fa-regular fa-fingerprint"></i>
+                                            </div>
+                                            <sapn class="fs-14">No password required</sapn>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
-                </form>
+                </div>
             </div>
         </section>
         <!-- End of Category Slider section

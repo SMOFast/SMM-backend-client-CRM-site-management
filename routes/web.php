@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Orders\OrderController;
 use App\Http\Controllers\Pages\IndexController;
 use App\Http\Controllers\Users\AuthController;
 use App\Http\Controllers\Users\RegisterController;
@@ -24,10 +25,14 @@ use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 
 
 Route::get('/', IndexController::class)->name('index');
+Route::get('/cart',  [OrderController::class, 'showCart'])->name('cart');
 
 Route::get('/{category}', IndexController::class)->name('category');
 Route::get('/{category}/{subcategory}', [IndexController::class, 'products'])->name('subcategory');
 Route::get('/{category}/{subcategory}/{product}', IndexController::class)->name('product');
+
+Route::post('/addToBasket', [OrderController::class, 'addToBasket'])->name('addToBasket');
+
 
 //Route::get('/', function () {
 

@@ -161,6 +161,18 @@ $(document).ready(function() {
     count = $('input[type=checkbox]:checked').length;
     displayCount();
 
+    $('.category-slider').on('click', '.product-card',  function() {
+        let product_id = $(this).data('id');
+        let count = $(this).data('count');
+        let default_price = $(this).data('price');
+        let discount_price = parseFloat($(this).data('discount_price'))-parseFloat($(this).data('price'));
+        let basket_block = $(this).parents('.tab-pane').find('.product_basket');
+        basket_block.find('.product_id').val(product_id);
+        basket_block.find('.product_count').val(count);
+        basket_block.find('.basket_price').html(default_price);
+        basket_block.find('.basket_discount_price').html(discount_price);
+    });
+
     $('input[type=checkbox]').bind('click', function(e, a) {
         if (this.checked) {
             count += a ? -1 : 1;
