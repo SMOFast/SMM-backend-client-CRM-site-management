@@ -48,9 +48,14 @@ class BaseApiService
      * @throws \App\Services\Server\Exceptions\UnexpectedResponseException
      * @throws \App\Services\Server\Exceptions\ErrorResponseException
      */
-    public function products($categoryId = null): Collection
+    public function products($categoryId = null, $productId = null): Collection
     {
-        $response = $this->request(url: 'products', data:['category_id'=>$categoryId], method: 'GET');
+
+        $url = 'products';
+        if ($productId ?? null) {
+            $url = 'products/'.$productId;
+        }
+        $response = $this->request(url: $url, data:['category_id'=>$categoryId], method: 'GET');
 
         $products = new Collection();
         foreach ($response['data'] as $product) {
@@ -58,6 +63,13 @@ class BaseApiService
         }
 
         return $products;
+    }
+
+    public function createOrder(int $productId, int $count, string $url, User $user)
+    {
+        $this->setUser($user);
+
+
     }
 
     /**

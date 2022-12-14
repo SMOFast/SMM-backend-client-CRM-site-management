@@ -1,4 +1,3 @@
-
 import.meta.glob([
     '../assets/img/**',
     '../assets/fonts/**',
@@ -9,12 +8,14 @@ import '../sass/global.scss'
 
 import ClipboardJS from "clipboard";
 
-import { createPopper } from '@popperjs/core';
+import {createPopper} from '@popperjs/core';
 
 import jQuery from 'jquery';
+
 window.$ = jQuery;
 
 import * as bootstrap from 'bootstrap'
+
 window.bootstrap = bootstrap;
 
 import slick from 'slick-carousel'
@@ -23,8 +24,8 @@ const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]
 
 let count = 0;
 
-$(document).ready(function() {
-    $(".nav-link").click(function(){
+$(document).ready(function () {
+    $(".nav-link").click(function () {
         $('.category-slider').slick('refresh');
     });
 
@@ -143,7 +144,7 @@ $(document).ready(function() {
 
     const clipboard = new ClipboardJS('.btn-clipboard')
 
-    clipboard.on('success', function(e) {
+    clipboard.on('success', function (e) {
 
         $('.tooltip-inner').html('Copied')
         $(e.trigger).tooltip('update')
@@ -161,11 +162,11 @@ $(document).ready(function() {
     count = $('input[type=checkbox]:checked').length;
     displayCount();
 
-    $('.category-slider').on('click', '.product-card',  function() {
+    $('.category-slider').on('click', '.product-card', function () {
         let product_id = $(this).data('id');
         let count = $(this).data('count');
         let default_price = $(this).data('price');
-        let discount_price = parseFloat($(this).data('discount_price'))-parseFloat($(this).data('price'));
+        let discount_price = parseFloat($(this).data('discount_price')) - parseFloat($(this).data('price'));
         let basket_block = $(this).parents('.tab-pane').find('.product_basket');
         basket_block.find('.product_id').val(product_id);
         basket_block.find('.product_count').val(count);
@@ -173,7 +174,7 @@ $(document).ready(function() {
         basket_block.find('.basket_discount_price').html(discount_price);
     });
 
-    $('input[type=checkbox]').bind('click', function(e, a) {
+    $('input[type=checkbox]').bind('click', function (e, a) {
         if (this.checked) {
             count += a ? -1 : 1;
         } else {
@@ -181,7 +182,7 @@ $(document).ready(function() {
         }
         displayCount();
     });
-    $('#count-post__reset').click(function(e) {
+    $('#count-post__reset').click(function (e) {
         $('#count-post, #count-post-2').text(0);
         $('input[type=checkbox]').removeAttr("checked");
         count = 0;
@@ -189,7 +190,7 @@ $(document).ready(function() {
 });
 
 
-$(window).on('load resize', function() {
+$(window).on('load resize', function () {
     if ($(window).width() < 991) {
         $('#mobile-slider:not(.slick-initialized)').slick({
             centerMode: true,
@@ -203,15 +204,15 @@ $(window).on('load resize', function() {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll('.navbar .dropdown').forEach(function(everydropdown) {
-        everydropdown.addEventListener('shown.bs.dropdown', function() {
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.navbar .dropdown').forEach(function (everydropdown) {
+        everydropdown.addEventListener('shown.bs.dropdown', function () {
             let el_overlay = document.createElement('span');
             el_overlay.className = 'screen-darken';
             document.body.appendChild(el_overlay)
         });
 
-        everydropdown.addEventListener('hide.bs.dropdown', function() {
+        everydropdown.addEventListener('hide.bs.dropdown', function () {
             document.body.removeChild(document.querySelector('.screen-darken'));
         });
     });
