@@ -9,16 +9,33 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
                     <input type="text" class="form-control" wire:model.lazy="url" placeholder="{{$product['attributes']['cart_link_description']['value'] ?? 'Url'}}" @if($errors->has('url')) is-invalid @endif>
-                    @error('url')  <div class="ms-2 mt-2 small text-danger">{{ $message }}</div> @enderror
+                    @error('url')
+                    <div class="ms-2 mt-2 small text-danger">{{ $message }}</div> @enderror
                 </div>
             </div>
             <div class="mb-3">
                 <div class="input-group mb-3">
                     <span class="input-group-text"><i class="fa-regular fa-at"></i></span>
-                    <input type="text" wire:model.lazy="email" class="form-control" placeholder="Email address" @if($errors->has('email')) is-invalid @endif>
-                    @error('email') <div class="ms-2 mt-2 small text-danger">{{ $message }}</div> @enderror
+                    <input type="text" wire:model.lazy="email" class="form-control" placeholder="Email address" @if($errors->has('email')) is-invalid @endif @if ($email && Auth::user()) readonly @endif>
+                    @error('email')
+                    <div class="ms-2 mt-2 small text-danger">{{ $message }}</div> @enderror
                 </div>
             </div>
+
+            <div class="mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="fa-regular fa-money-bill"></i></span>
+                    <select wire:model.lazy="paymentSystem" class="form-control @if($errors->has('paymentSystem')) is-invalid @endif ">
+                        <option>Please select payment method</option>
+                        @foreach($paymentSystems as $paymentSystem)
+                            <option value="{{$paymentSystem['id']}}">{{$paymentSystem['name']}}</option>
+                        @endforeach
+                    </select>
+                    @error('paymentSystem')
+                    <div class="ms-2 mt-2 small text-danger">{{ $message }}</div> @enderror
+                </div>
+            </div>
+
             <div class="dropdown mb-4">
                 <div class="form-control cursor-pointer d-flex align-items-center w-100 selected-count" data-bs-toggle="dropdown" aria-expanded="false">
                     @foreach($product['discounts'] as $discount)
@@ -46,6 +63,14 @@
                         </li>
                     @endforeach
                 </ul>
+
+
+
+                @if (session()->has('error'))
+                    <div class="ms-2 mt-2 small text-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">

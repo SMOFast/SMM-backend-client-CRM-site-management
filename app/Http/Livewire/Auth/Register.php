@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Http\Controllers\Users\RegisterController;
+use App\Services\Auth\UsersService;
 use App\Services\Client\Dto\RegisterUserRequestClientDto;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
@@ -41,7 +42,7 @@ class Register extends Component
         ]));
 
         try {
-            app(RegisterController::class)->store($dto);
+            app(UsersService::class)->registerUser($dto);
         } catch (\Throwable $e) {
             throw ValidationException::withMessages([
                 Fortify::username() => [$e->getMessage()],

@@ -3,9 +3,17 @@
 namespace App\Http\Livewire\Cart;
 
 use App\Http\Controllers\Users\RegisterController;
+use App\Models\User;
+use App\Services\Auth\UsersService;
+use App\Services\Client\Dto\LoginUserRequestClientDto;
 use App\Services\Client\Dto\RegisterUserRequestClientDto;
+use App\Services\Server\Dto\Requests\CreateOrderRequestDto;
+use App\Services\Server\OrderService;
+use App\Services\Server\PaymentSystemService;
 use App\Services\Server\ProductService;
+use Auth;
 use Illuminate\Session\SessionManager;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use Livewire\Component;
@@ -17,19 +25,28 @@ class Order extends Component {
     public $count;
     public $product;
     public $cart;
+    public $paymentSystems;
+    public $paymentSystem;
 
     protected $rules = [
-        'email' => [
+        'email'         => [
             'required',
             'email:strict',
         ],
-        'url'   => 'required|active_url',
-        'count' => 'required|numeric',
+        'url'           => 'required|active_url',
+        'count'         => 'required|numeric',
+        'paymentSystem' => 'required|numeric',
     ];
 
-    public function mount(SessionManager $session)
-    {
+    public function mount(SessionManager $session) {
+
+        $this->url = 'https://yandex.ru';
+        $this->email = 'sd323c@sdc.ru';
         $this->cart = $session->get('cart');
+
+        if ($this->cart === null) {
+            return false;
+        }
 
         $this->count = $this->cart['count'];
 
@@ -37,10 +54,17 @@ class Order extends Component {
 
         $this->product = $product[0];
 
+        $this->paymentSystems = app(PaymentSystemService::class)->list();
+
+        if (Auth::user()) {
+            $this->email = Auth::user()->email;
+        }
+
+        return true;
+
     }
 
-    public function updateCount($count)
-    {
+    public function updateCount($count) {
         $this->count = $count;
     }
 
@@ -52,22 +76,65 @@ class Order extends Component {
         $this->validate();
 
         /* todo check user exist, if no - register */
-        dd($this->email, $this->url, $this->count);
+        //        dd($this->email, $this->url, $this->count);
 
-        $dto = (new RegisterUserRequestClientDto([
-            'email'    => $this->email,
-            'password' => $this->password,
-        ]));
+        if (Auth::user() === null) {
 
-        try {
-            app(RegisterController::class)->store($dto);
-        } catch (\Throwable $e) {
-            throw ValidationException::withMessages([
-                Fortify::username() => [$e->getMessage()],
-            ]);
+            if (User::query()->where(['email' => $this->email])->exists()) {
+                session()->flash('error', __('auth.need_login_first'));
+
+                return false;
+            }
+
+            try {
+
+                $password = Str::random(8);
+                $registerDto = (new RegisterUserRequestClientDto([
+                    'email'    => $this->email,
+                    'password' => $password,
+                ]));
+
+                (new UsersService())->registerUser($registerDto);
+
+
+                $loginDto = (new LoginUserRequestClientDto([
+                    'email'    => $this->email,
+                    'password' => $password,
+                    'remember' => false,
+                    'ip'       => request()->server('REMOTE_ADDR'),
+                ]));
+
+                (new UsersService())->auth($loginDto);
+
+            } catch (\Throwable $e) {
+                session()->flash('error', $e->getMessage());
+
+                return false;
+            }
+
         }
 
-        $this->redirect(route('login'));
 
+        try {
+
+            $orderDto = new CreateOrderRequestDto([
+                'items'=>[
+                    ['id'=>$this->cart['product_id'], 'count'=>$this->count],
+                ],
+                'url'            => $this->url,
+                'payment_system_id' => $this->paymentSystem,
+                'user'           => Auth::user(),
+            ]);
+
+            $order = (new OrderService())->create($orderDto);
+        } catch (\Throwable $e) {
+            session()->flash('error', $e->getMessage());
+
+            return false;
+        }
+
+        $this->redirect(route('orders'));
+
+        return true;
     }
 }

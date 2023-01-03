@@ -1,18 +1,18 @@
 <?php
 
 namespace App\Services\Server;
-use App\Services\Server\Dto\Requests\CreateOrderRequestDto;
+use Illuminate\Support\Collection;
 
-class OrderService
+class PaymentSystemService
 {
 
     /**
      * @throws \Exception
      */
-    function create(CreateOrderRequestDto $dto): Dto\Responses\CreateOrderResponseDto {
+    function list(int $paymentSystem = null): Collection {
 
         try {
-            $orderData = (new BaseApiService())->createOrder($dto);
+            $orderData = (new BaseApiService())->paymentSystems($paymentSystem);
         } catch (\Throwable $e) {
             throw new \Exception($e->getMessage()); //todo fix
         }

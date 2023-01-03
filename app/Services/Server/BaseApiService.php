@@ -3,8 +3,9 @@
 namespace App\Services\Server;
 
 use App\Models\User;
+use App\Services\Server\Dto\Requests\CreateOrderRequestDto;
 use App\Services\Server\Dto\Requests\RegisterUserRequestDto;
-use App\Services\Server\Dto\Responses\CategoriesResponseDto;
+use App\Services\Server\Dto\Responses\CreateOrderResponseDto;
 use App\Services\Server\Dto\Responses\RegisterUserResponseDto;
 use App\Services\Server\Dto\Responses\UserInfoResponseDto;
 use App\Services\Server\Exceptions\ErrorResponseException;
@@ -13,6 +14,7 @@ use App\Services\Server\Exceptions\UnexpectedResponseException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
+use Spatie\DataTransferObject\Exceptions\UnknownProperties;
 
 class BaseApiService
 {
@@ -65,11 +67,38 @@ class BaseApiService
         return $products;
     }
 
-    public function createOrder(int $productId, int $count, string $url, User $user)
+    public function paymentSystems($paymentSystem = null): Collection
     {
-        $this->setUser($user);
+        $url = 'payment_systems';
+        if ($paymentSystem ?? null) {
+            $url = 'payment_systems/'.$paymentSystem;
+        }
+        $response = $this->request(url: $url, method: 'GET');
 
+        $paymentSystems = new Collection();
+        foreach ($response['data'] as $paymentSystem) {
+            $paymentSystems->add($paymentSystem);
+        }
 
+        return $paymentSystems;
+    }
+
+    /**
+     * @throws UnknownProperties
+     * @throws UnexpectedResponseException
+     * @throws ErrorResponseException
+     */
+    public function createOrder(CreateOrderRequestDto $dto): CreateOrderResponseDto
+    {
+        $this->setUser($dto->user);
+
+        if ($this->user === null) {
+            throw new UnauthenticatedResponseException();
+        }
+
+        $response = $this->request('orders/create', $dto->toArray());
+
+        return (new CreateOrderResponseDto($response['data']));
     }
 
     /**
@@ -146,7 +175,7 @@ class BaseApiService
         try {
             $response = $this->client->request($method, $url, $options);
         } catch (GuzzleException $e) {
-            $response = $e->getResponse();
+            $response = $e->getMessage();
             throw new ErrorResponseException($response, $e);
         }
 

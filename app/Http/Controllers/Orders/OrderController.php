@@ -19,7 +19,9 @@ class OrderController extends Controller {
     public function showCart(Request $request) {
         $cart = $request->session()->get('cart');
 
-        $product = app(ProductService::class)->product($cart['product_id']);
+        if ($cart ?? null) {
+            $product = app(ProductService::class)->product($cart['product_id']);
+        }
 
         return view('pages.cart', [
             'product' => $product[0] ?? null,
