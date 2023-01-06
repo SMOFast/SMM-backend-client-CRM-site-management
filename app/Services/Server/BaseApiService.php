@@ -12,6 +12,7 @@ use App\Services\Server\Exceptions\ErrorResponseException;
 use App\Services\Server\Exceptions\UnauthenticatedResponseException;
 use App\Services\Server\Exceptions\UnexpectedResponseException;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Collection;
 use Spatie\DataTransferObject\Exceptions\UnknownProperties;
@@ -174,9 +175,12 @@ class BaseApiService
 
         try {
             $response = $this->client->request($method, $url, $options);
+        } catch (ClientException $e) {
+            $response = $e->getResponse()->getBody()->getContents();
+            $jsonBody = json_decode($response, true);
+            throw new ErrorResponseException($jsonBody['message'], $e);
         } catch (GuzzleException $e) {
-            $response = $e->getMessage();
-            throw new ErrorResponseException($response, $e);
+            throw new ErrorResponseException('Error API_CALL '.$e->getMessage(), $e);
         }
 
         $jsonBody = json_decode($response->getBody()->getContents(), true);

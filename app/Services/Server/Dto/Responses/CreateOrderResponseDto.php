@@ -8,6 +8,7 @@ class CreateOrderResponseDto extends DataTransferObject
 {
 
     public int    $id;
+    public ?string $paymentForm;
 
 }
 

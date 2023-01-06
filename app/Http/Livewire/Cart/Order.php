@@ -28,6 +28,8 @@ class Order extends Component {
     public $paymentSystems;
     public $paymentSystem;
 
+    public $paymentForm;
+
     protected $rules = [
         'email'         => [
             'required',
@@ -131,6 +133,11 @@ class Order extends Component {
             session()->flash('error', $e->getMessage());
 
             return false;
+        }
+
+        if ($order->paymentForm ?? null) {
+            $this->paymentForm = $order->paymentForm;
+            return true;
         }
 
         $this->redirect(route('orders'));

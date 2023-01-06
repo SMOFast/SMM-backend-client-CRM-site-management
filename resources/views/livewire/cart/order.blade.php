@@ -65,7 +65,6 @@
                 </ul>
 
 
-
                 @if (session()->has('error'))
                     <div class="ms-2 mt-2 small text-danger">
                         {{ session('error') }}
@@ -78,7 +77,11 @@
                     Send me special promotions and discounts
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary w-100 mt-5" wire:click="create" wire:loading.attr="disabled">Continue</button>
+            @if ($paymentForm ?? null)
+                {!! $paymentForm !!}
+            @else
+                <button class="btn btn-lg btn-primary w-100 mt-5" wire:click="create" wire:loading.attr="disabled">Continue</button>
+            @endif
         </div>
     @else
         <h1 class="h4 mb-1">Cart is empty</h1>
