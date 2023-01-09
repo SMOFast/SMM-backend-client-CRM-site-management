@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Cart;
+namespace App\Http\Livewire\Cabinet;
 
 use App\Http\Controllers\Users\RegisterController;
 use App\Models\User;
@@ -18,7 +18,7 @@ use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use Livewire\Component;
 
-class Order extends Component {
+class Orders extends Component {
 
     public $email;
     public $url;
@@ -71,7 +71,7 @@ class Order extends Component {
     }
 
     public function render() {
-        return view('livewire.cart.order');
+        return view('livewire.cabinet.orders');
     }
 
     public function create() {

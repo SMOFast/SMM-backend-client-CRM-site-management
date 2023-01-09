@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Livewire\Cart;
+namespace App\Http\Livewire\Cabinet\Tickets;
 
-use App\Http\Controllers\Users\RegisterController;
 use App\Models\User;
 use App\Services\Auth\UsersService;
 use App\Services\Client\Dto\LoginUserRequestClientDto;
@@ -14,11 +13,9 @@ use App\Services\Server\ProductService;
 use Auth;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
-use Laravel\Fortify\Fortify;
 use Livewire\Component;
 
-class Order extends Component {
+class Tickets extends Component {
 
     public $email;
     public $url;
@@ -71,7 +68,7 @@ class Order extends Component {
     }
 
     public function render() {
-        return view('livewire.cart.order');
+        return view('livewire.cabinet.tickets.index');
     }
 
     public function create() {

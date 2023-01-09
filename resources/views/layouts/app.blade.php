@@ -125,7 +125,7 @@
 
                 @if (Auth::user())
                     <div class="nav-item_user">
-                        <a href="/my-orders.php"
+                        <a href="{{ route('orders') }}"
                            class="btn btn-outline d-block d-lg-inline text-start text-lg-center"><i
                                 class="fa-regular fa-check-to-slot me-2"></i> My Orders</a>
                     </div>
@@ -161,10 +161,10 @@
             <div class="col-lg-8 mt-4 mt-lg-0 ms-0 ma-lg-auto">
                 <nav class="footer__nav">
                     <ul class="list-unstyled d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
-                        <li class="mt-3 mt-sm-0 me-4"><a href="/terms-of-service.php" class="footer__nav_link">Terms of
+                        <li class="mt-3 mt-sm-0 me-4"><a href="{{ route('pages', ['page'=>'terms']) }}" class="footer__nav_link">Terms of
                                 Service</a></li>
                         <li class="mt-3 mt-sm-0 me-4"><a href="#" class="footer__nav_link">Tickets</a></li>
-                        <li class="mt-3 mt-sm-0 me-4"><a href="/contact-us.php" class="footer__nav_link">Contact Us</a>
+                        <li class="mt-3 mt-sm-0 me-4"><a href="{{ route('contact-us') }}" class="footer__nav_link">Contact Us</a>
                         </li>
                         <li class="mt-3 mt-sm-0 dropdown">
                             <a href="#" class="footer__nav_link" data-bs-toggle="dropdown" aria-expanded="false">

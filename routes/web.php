@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Orders\OrderController;
 use App\Http\Controllers\Pages\IndexController;
+use App\Http\Controllers\Pages\PageController;
 use App\Http\Controllers\Users\AuthController;
+use App\Http\Controllers\Users\CabinetController;
 use App\Http\Controllers\Users\RegisterController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
@@ -172,7 +174,34 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
 
 Route::get('/', IndexController::class)->name('index');
 Route::get('/cart',  [OrderController::class, 'showCart'])->name('cart');
-Route::get('/orders', IndexController::class)->name('orders'); //todo fix
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+
+    Route::get('/orders', [CabinetController::class, 'orders'])->name('orders');
+
+    Route::get('/tickets', function () {
+        return view('pages.cabinet.tickets.index');
+    })->name('tickets');
+
+    Route::get('/tickets/create', function () {
+        return view('pages.cabinet.tickets.create');
+    })->name('tickets.create');
+
+    Route::get('/faq/{faq?}', function () {
+        return view('pages.cabinet.faq');
+    })->name('faq');
+
+});
+
+Route::get('/contact-us', function () {
+    return view('pages.contact_us');
+})->name('contact-us');
+
+Route::get('/page/{page}', PageController::class)->name('pages');
 
 Route::get('/{category}', IndexController::class)->name('category');
 Route::get('/{category}/{subcategory}', [IndexController::class, 'products'])->name('subcategory');

@@ -16,9 +16,7 @@ class IndexController extends Controller
      */
     public function __invoke()
     {
-        return view('pages.index', [
-            'categories' => app(CategoryService::class)->list(),
-        ]);
+        return view('pages.index');
     }
 
     public function products($category, $subcategory)
