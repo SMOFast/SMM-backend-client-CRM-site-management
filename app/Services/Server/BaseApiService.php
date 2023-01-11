@@ -4,6 +4,7 @@ namespace App\Services\Server;
 
 use App\Models\User;
 use App\Services\Server\Dto\Requests\CreateOrderRequestDto;
+use App\Services\Server\Dto\Requests\ListOrdersRequestDto;
 use App\Services\Server\Dto\Requests\RegisterUserRequestDto;
 use App\Services\Server\Dto\Responses\CreateOrderResponseDto;
 use App\Services\Server\Dto\Responses\RegisterUserResponseDto;
@@ -82,6 +83,26 @@ class BaseApiService
         }
 
         return $paymentSystems;
+    }
+
+    public function orders(ListOrdersRequestDto $dto)
+    {
+        $this->setUser($dto->user);
+
+        if ($this->user === null) {
+            throw new UnauthenticatedResponseException();
+        }
+
+        $url = 'orders';
+
+        $response = $this->request(url: $url, data: $dto->toArray());
+
+        $orders = new Collection();
+        foreach ($response['data'] as $order) {
+            $orders->add($order);
+        }
+
+        return $orders;
     }
 
     /**

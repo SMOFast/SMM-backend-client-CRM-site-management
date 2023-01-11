@@ -53,188 +53,40 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-yellow rounded me-3">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                        <span>Instagram Likes</span>
-                    </div>
-                </th>
-                <td>20.10.22 in 22:41 PM</td>
-                <td>$7.99 USD</td>
-                <td>1000 likes</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-yellow rounded fw-medium text-center">Processing</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-green rounded me-3">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                        <span>Youtube Views</span>
-                    </div>
-                </th>
-                <td>16.10.22 in 16:55 PM</td>
-                <td>$8.99 USD</td>
-                <td>5000 views</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-green rounded fw-medium text-center">Performed</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-green rounded me-3">
-                            <i class="fa-solid fa-tv"></i>
-                        </div>
-                        <span>Instagram IGTV Views</span>
-                    </div>
-                </th>
-                <td>13.10.22 in 10:11 AM</td>
-                <td>$17.99 USD</td>
-                <td>2500 IGTV Views</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-green rounded fw-medium text-center">Performed</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-red rounded me-3">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                        <span>Youtube Views</span>
-                    </div>
-                </th>
-                <td>16.10.22 in 16:55 PM</td>
-                <td>$8.99 USD</td>
-                <td>5000 views</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-red rounded fw-medium text-center">Error</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-yellow rounded me-3">
-                            <i class="fa-solid fa-heart"></i>
-                        </div>
-                        <span>Instagram Likes</span>
-                    </div>
-                </th>
-                <td>20.10.22 in 22:41 PM</td>
-                <td>$7.99 USD</td>
-                <td>1000 likes</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-yellow rounded fw-medium text-center">Processing</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-green rounded me-3">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                        <span>Youtube Views</span>
-                    </div>
-                </th>
-                <td>16.10.22 in 16:55 PM</td>
-                <td>$8.99 USD</td>
-                <td>5000 views</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-green rounded fw-medium text-center">Performed</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-green rounded me-3">
-                            <i class="fa-solid fa-tv"></i>
-                        </div>
-                        <span>Instagram IGTV Views</span>
-                    </div>
-                </th>
-                <td>13.10.22 in 10:11 AM</td>
-                <td>$17.99 USD</td>
-                <td>2500 IGTV Views</td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-green rounded fw-medium text-center">Performed</div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">
-                    <div class="d-flex align-items-center">
-                        <div class="icon-32 bg-soft-red rounded me-3">
-                            <i class="fa-solid fa-eye"></i>
-                        </div>
-                        <span>Youtube Views</span>
-                    </div>
-                </th>
-                <td>
-                    16.10.22 in 16:55 PM
-                </td>
-                <td>
-                    $8.99 USD
-                </td>
-                <td>
-                    5000 views
-                </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="text-truncate" style="max-width: 100px">mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5</div>
-                        <button type="button" class="btn-clipboard" data-clipboard-text="mtTCazo8VEyTZLqAbD7q9D1U8zwhsouyV5" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="px-3 py-2 bg-soft-red rounded fw-medium text-center">Error</div>
-                </td>
-            </tr>
+                @foreach($orders as $order)
+                    <tr>
+
+                        <th scope="row">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-32 bg-soft-yellow rounded me-3">
+                                    <i class="fa-solid fa-heart"></i>
+                                </div>
+                                <span>{{$order['products'][0]['name']}}</span>
+                            </div>
+                        </th>
+                        <td>{{$order['createdAt']}}</td>
+                        <td>${{$order['amount']}} USD</td>
+                        <td>{{$order['products'][0]['order_count'] * $order['products'][0]['multiplicity']}} {{$order['products'][0]['attributes']['multiplicity_description']['value']}}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="text-truncate" style="max-width: 100px">{{$order['id']}}</div>
+                                <button type="button" class="btn-clipboard" data-clipboard-text="{{$order['id']}}" data-bs-toggle="tooltip" data-bs-placement="right" title="Copy Order ID"><i class="fa-regular fa-copy color-grey-600 ms-2"></i></button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="px-3 py-2 bg-soft-yellow rounded fw-medium text-center">Processing</div>
+                        </td>
+                    </tr>
+
+                @endforeach
+
+                <!--
+                <div class="px-3 py-2 bg-soft-green rounded fw-medium text-center">Performed</div>
+                <div class="px-3 py-2 bg-soft-red rounded fw-medium text-center">Error</div>
+                <div class="px-3 py-2 bg-soft-yellow rounded fw-medium text-center">Processing</div>
+                -->
+
+
             </tbody>
         </table>
     </div>
