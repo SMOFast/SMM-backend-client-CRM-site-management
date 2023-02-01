@@ -32,6 +32,24 @@ class BaseApiService
         ]);
     }
 
+    public function pages($pageSlug = null)
+    {
+
+        $url = 'pages';
+        if ($pageSlug ?? null) {
+            $url = 'pages/'.$pageSlug;
+        }
+
+        $response = $this->request(url: $url, method: 'GET');
+
+        $pages = new Collection();
+        foreach ($response['data'] as $page) {
+            $pages->add($page);
+        }
+
+        return $pages;
+    }
+
     /**
      * @throws \App\Services\Server\Exceptions\UnexpectedResponseException
      * @throws \App\Services\Server\Exceptions\ErrorResponseException
@@ -199,6 +217,9 @@ class BaseApiService
         } catch (ClientException $e) {
             $response = $e->getResponse()->getBody()->getContents();
             $jsonBody = json_decode($response, true);
+            if ($e->getCode() === 404) {
+                abort(404);
+            }
             throw new ErrorResponseException($jsonBody['message'], $e);
         } catch (GuzzleException $e) {
             throw new ErrorResponseException('Error API_CALL '.$e->getMessage(), $e);

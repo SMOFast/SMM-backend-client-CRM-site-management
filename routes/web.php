@@ -201,7 +201,7 @@ Route::get('/contact-us', function () {
     return view('pages.contact_us');
 })->name('contact-us');
 
-Route::get('/page/{page}', PageController::class)->name('pages');
+Route::get('/page/{page}', [PageController::class, 'page'])->name('pages');
 
 Route::get('/{category}', IndexController::class)->name('category');
 Route::get('/{category}/{subcategory}', [IndexController::class, 'products'])->name('subcategory');
