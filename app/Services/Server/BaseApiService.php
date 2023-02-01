@@ -222,6 +222,9 @@ class BaseApiService
             }
             throw new ErrorResponseException($jsonBody['message'], $e);
         } catch (GuzzleException $e) {
+            if ($e->getCode() === 500) {
+                abort(500, 'Server call error');
+            }
             throw new ErrorResponseException('Error API_CALL '.$e->getMessage(), $e);
         }
 
