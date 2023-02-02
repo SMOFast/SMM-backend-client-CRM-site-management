@@ -203,7 +203,7 @@
         <hr class="mt-5 mb-32px">
         <div class="row align-items-center">
             <div class="col-lg-4">
-                <span class="small">2022 All Rights Reserved</span>
+                <span class="small">2022-2023 All Rights Reserved</span>
             </div>
             <div
                 class="col-lg-8 mt-4 mt-lg-0 ms-0 ms-lg-auto d-flex flex-wrap justify-content-center justify-content-lg-end">
