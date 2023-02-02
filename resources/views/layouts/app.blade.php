@@ -44,7 +44,7 @@
                 <span class="icon-bar bottom-bar"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav align-items-center me-auto mb-2 mb-lg-0">
                     @foreach($categories as $category)
                         @if ($category['parent'] !== null)
                             @continue
