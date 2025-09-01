@@ -8,7 +8,6 @@ class CategoryService
 {
     function list(): Collection
     {
-        return (new BaseApiService())->categories();
         return Cache::rememberForever('categories', function () {
             return (new BaseApiService())->categories();
         });
